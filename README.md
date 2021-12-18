@@ -1,0 +1,2 @@
+# trustedpartners
+exam angular app
