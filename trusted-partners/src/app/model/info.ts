@@ -85,7 +85,7 @@ export interface Meta {
     unsafe: number;
 }
 
-export interface info {
+export default interface info {
     Abstract: string;
     AbstractSource: string;
     AbstractText: string;
