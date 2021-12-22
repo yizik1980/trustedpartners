@@ -1,3 +1,9 @@
 <div class="list">
-    <app-autocomplete-item *ngFor="let item of relatedTopics" [item]="item"></app-autocomplete-item>
+    <app-autocomplete-item *ngFor="let item of mainTopics" [item]="item"></app-autocomplete-item>
+    <div class="subtopics">
+        <aside class="item" *ngFor="let subitem of subTopics">
+            <h4>{{subitem.Name}}</h4>
+            <!-- <app-autocomplete-item  [item]="subitem"></app-autocomplete-item> -->
+        </aside>
+    </div>
 </div>

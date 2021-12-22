@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import  info  from '../model/info';
 
@@ -11,6 +11,8 @@ export class RemoteInfoService {
 
   constructor(private http:HttpClient) { }
   getInfo(text:string):Observable<info>{
-    return this.http.get<info>(environment.remoteUrl+`?q=${text}&format=json`)
+    return text.length>1
+    ? this.http.get<info>(environment.remoteUrl+`?q=${text}&format=json`)
+    :of({} as info);
   }
 }

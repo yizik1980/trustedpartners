@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RelatedTopic } from 'src/app/model/info';
+import { Topic } from 'src/app/model/info';
 
 @Component({
   selector: 'app-autocomplete-item',
@@ -8,7 +8,7 @@ import { RelatedTopic } from 'src/app/model/info';
 })
 export class AutocompleteItemComponent implements OnInit {
   @Input()
-  item:RelatedTopic | undefined;
+  item:Topic | undefined;
   constructor() { }
 
   ngOnInit(): void {
