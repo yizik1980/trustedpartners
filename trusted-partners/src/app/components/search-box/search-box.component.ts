@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
-import { debounceTime, filter, fromEvent, map, switchMap } from 'rxjs';
+import { debounceTime, filter, fromEvent, mergeMap } from 'rxjs';
 import { RemoteInfoService } from 'src/app/services/remote-info.service';
 import  info  from '../../model/info';
 @Component({
@@ -17,7 +17,7 @@ export class SearchBoxComponent implements OnInit ,AfterViewInit{
     if(this.searchField){
       fromEvent<KeyboardEvent>(this.searchField.nativeElement,'keydown')
       .pipe(debounceTime(2000))
-       .pipe(switchMap(keyEvent=>{
+       .pipe(mergeMap(keyEvent=>{
         var txtVal = (keyEvent.target as HTMLInputElement).value;
         console.log(txtVal);
          return this.remoteInfo.getInfo(txtVal)

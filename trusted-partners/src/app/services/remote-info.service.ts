@@ -10,9 +10,10 @@ import  info  from '../model/info';
 export class RemoteInfoService {
 
   constructor(private http:HttpClient) { }
+
   getInfo(text:string):Observable<info>{
     return text.length>1
-    ? this.http.get<info>(environment.remoteUrl+`?q=${text}&format=json`)
+    ? this.http.get<info>(environment.remoteUrl+`${text}`)
     :of({} as info);
   }
 }

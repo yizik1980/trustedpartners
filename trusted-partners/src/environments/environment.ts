@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  remoteUrl:`https://api.duckduckgo.com`
+  remoteUrl:`http://localhost:3000/api/`
 };
 
 /*
