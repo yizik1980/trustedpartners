@@ -1,15 +1,13 @@
 aside {
     width: 50vw;
-    margin: 0 auto 3% auto;
-    height: 50px;
+    margin: 1% auto 3% auto;
     p {
         padding: 2%;
         overflow: hidden;
-        -webkit-text-emphasis-color: red;
         text-overflow: ellipsis;
         box-shadow: 0 0 1px 0;
+        max-height: 55px;
         a {
-            text-emphasis: 29px;
             color: #000;
         }
     }
