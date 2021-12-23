@@ -26,6 +26,9 @@ export class AutocompleteListComponent implements OnChanges {
       this.mainTopics = this.relatedTopics?.filter(item=>item.FirstURL);
       this.mainPage.mainLength = this.mainTopics.length;
       this.subTopics = this.relatedTopics?.filter(item=>item.Name);
+    }else{
+      this.mainTopics = [];
+      this.subTopics =[];
     }
   }
 
