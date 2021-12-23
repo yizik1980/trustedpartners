@@ -6,7 +6,6 @@ apiRouter.get("/:q", (req, res) => {
     var query = req.params.q;
     console.log(query)
     infoRequest.getinfo(query, (err, response, body) => {
-        console.log(response ? .statusCode);
         if (err || !response.statusCode || response.statusCode != 200) {
             res.status(500).json(err);
         } else {

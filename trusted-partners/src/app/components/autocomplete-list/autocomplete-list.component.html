@@ -3,7 +3,7 @@
     <div class="subtopics">
         <aside class="item" *ngFor="let subitem of subTopics">
             <h4>{{subitem.Name}}</h4>
-            <!-- <app-autocomplete-item  [item]="subitem"></app-autocomplete-item> -->
+            <app-autocomplete-item *ngFor="let topic of subitem.Topics" [item]="topic"></app-autocomplete-item>
         </aside>
     </div>
 </div>

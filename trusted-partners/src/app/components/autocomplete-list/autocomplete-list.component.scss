@@ -1,0 +1,13 @@
+.subtopics {
+    margin: 2% auto;
+    p {
+        padding: 2%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        box-shadow: 0 0 1px 0;
+        a {
+            text-emphasis: 29px;
+            color: #000;
+        }
+    }
+}
