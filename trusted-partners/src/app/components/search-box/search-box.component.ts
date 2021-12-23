@@ -29,7 +29,9 @@ export class SearchBoxComponent implements OnInit, AfterViewInit, OnDestroy {
           var txtVal = (keyEvent.target as HTMLInputElement).value;
           console.log(txtVal);
           return this.remoteInfo.getInfo(txtVal)
-        })).subscribe();
+        })).subscribe(res=>{},err=>{
+          this.errorMessage = err.message;
+        });
     }
   }
   ngOnDestroy(): void {

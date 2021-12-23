@@ -15,9 +15,7 @@ export class SearchHistoryComponent implements OnInit {
     this.searchList = this.infoService.getsearchHistory();
   }
   showSearch(val:string){
-    this.infoService.getInfo(val).subscribe(res=>{
-      
-    })
+    this.infoService.getInfo(val).subscribe()
   }
 
 }
