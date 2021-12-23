@@ -1,5 +1,6 @@
 <div class="list">
-    <app-autocomplete-item *ngFor="let item of mainTopics" [item]="item"></app-autocomplete-item>
+    <app-autocomplete-item *ngFor="let item of mainTopics | slice: (mainPage.page-1)*mainPage.pageSize:mainPage.page * mainPage.pageSize" [item]="item"></app-autocomplete-item>
+    <ngb-pagination *ngIf="mainPage.mainLength" [(page)]="mainPage.page" [pageSize]="mainPage.pageSize" [collectionSize]="mainPage.mainLength"></ngb-pagination>
     <div class="subtopics">
         <aside class="item" *ngFor="let subitem of subTopics">
             <h4>{{subitem.Name}}</h4>
