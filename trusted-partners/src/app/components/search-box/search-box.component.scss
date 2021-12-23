@@ -1,16 +1,15 @@
 .search {
     position: absolute;
-    top: 43%;
-    right: 10%;
-}
-
-.wrap {
-    display: flex;
-    justify-content: center;
+    top: 34%;
+    right: 13%;
 }
 
 .wrap {
     input[type=text] {
         width: 90%;
     }
+}
+
+.message {
+    padding: 2%;
 }

@@ -1,0 +1,6 @@
+<div *ngIf="searchList.length>0" class="wrap">
+    <h6>Search List History</h6>
+    <aside>
+        <p *ngFor="let item of searchList"><a class="cursor" (click)="showSearch(item.definition)">{{item.definition}}</a></p>
+    </aside>
+</div>

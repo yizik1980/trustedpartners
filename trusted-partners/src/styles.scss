@@ -9,12 +9,28 @@
     padding: 2%;
 }
 
+.main {
+    padding: 8%;
+    >section {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        flex-shrink: 100%;
+        flex-direction: row;
+    }
+}
+
+.cursor {
+    cursor: pointer;
+}
+
+app-search-history {
+    width: 30%;
+}
+
 app-search-box {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    width: 70%;
     min-height: 70vh;
 }
 

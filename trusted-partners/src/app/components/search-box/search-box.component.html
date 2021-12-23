@@ -1,2 +1,10 @@
-<div class="wrap relative"><input placeholder="search..." type="text" #searchField><b class="search"></b></div>
+<div class="wrap">
+    <h6>Search from DuckDuckGo</h6>
+    <div class="relative">
+        <input placeholder="search..." type="text" #searchField><b class="search"></b>
+    </div>
+</div>
 <app-autocomplete-list [relatedTopics]="info?.RelatedTopics"></app-autocomplete-list>
+<div *ngIf="errorMessage" class="message">
+    <p><span>{{errorMessage}}</span></p>
+</div>

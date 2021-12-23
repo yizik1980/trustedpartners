@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
-import { debounceTime, filter, fromEvent, mergeMap } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
+import { debounceTime, filter, fromEvent, mergeMap, Subscription } from 'rxjs';
 import { RemoteInfoService } from 'src/app/services/remote-info.service';
 import info from '../../model/info';
 @Component({
@@ -7,28 +7,33 @@ import info from '../../model/info';
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss']
 })
-export class SearchBoxComponent implements OnInit, AfterViewInit {
+export class SearchBoxComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchField') searchField: ElementRef = new ElementRef(null);
   info: info | undefined;
   errorMessage = '';
+  keySubscription = new Subscription()
   constructor(private remoteInfo: RemoteInfoService) { }
+
   ngOnInit(): void {
+    this.remoteInfo.infoSubject.subscribe(infoRes=>{
+      this.info = infoRes;
+      console.log(infoRes);
+      this.errorMessage = infoRes.RelatedTopics.length > 0 ? '' : 'nothing  to found on ' + infoRes.Definition
+    })
   }
   ngAfterViewInit(): void {
     if (this.searchField) {
-      fromEvent<KeyboardEvent>(this.searchField.nativeElement, 'keydown')
+  this.keySubscription = fromEvent<KeyboardEvent>(this.searchField.nativeElement, 'keydown')
         .pipe(debounceTime(1000))
         .pipe(mergeMap(keyEvent => {
           var txtVal = (keyEvent.target as HTMLInputElement).value;
           console.log(txtVal);
           return this.remoteInfo.getInfo(txtVal)
-        })).subscribe(result => {
-          this.info = result;
-          console.log(result);
-          this.errorMessage = result.RelatedTopics.length > 0 ? '' : 'nothing found to ' + result.Definition
-        });
+        })).subscribe();
     }
   }
-
+  ngOnDestroy(): void {
+    this.keySubscription.unsubscribe();
+  }
 
 }

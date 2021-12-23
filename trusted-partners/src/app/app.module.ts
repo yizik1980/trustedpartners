@@ -11,13 +11,15 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
 import { AutocompleteListComponent } from './components/autocomplete-list/autocomplete-list.component';
 import { AutocompleteItemComponent } from './components/autocomplete-item/autocomplete-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SearchHistoryComponent } from './components/search-history/search-history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchBoxComponent,
     AutocompleteListComponent,
-    AutocompleteItemComponent
+    AutocompleteItemComponent,
+    SearchHistoryComponent
   ],
   imports: [
     BrowserModule,
