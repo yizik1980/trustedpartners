@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 
 
 import { FormsModule } from '@angular/forms';
@@ -12,6 +12,8 @@ import { AutocompleteListComponent } from './components/autocomplete-list/autoco
 import { AutocompleteItemComponent } from './components/autocomplete-item/autocomplete-item.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SearchHistoryComponent } from './components/search-history/search-history.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { HttpCallInterceptor } from './interceptors/http-call.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { SearchHistoryComponent } from './components/search-history/search-histo
     SearchBoxComponent,
     AutocompleteListComponent,
     AutocompleteItemComponent,
-    SearchHistoryComponent
+    SearchHistoryComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,13 @@ import { SearchHistoryComponent } from './components/search-history/search-histo
     HttpClientModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpCallInterceptor,
+      multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

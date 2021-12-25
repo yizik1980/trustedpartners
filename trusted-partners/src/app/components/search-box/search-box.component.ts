@@ -11,13 +11,13 @@ export class SearchBoxComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('searchField') searchField: ElementRef = new ElementRef(null);
   info: info | undefined;
   errorMessage = '';
-  keySubscription = new Subscription()
+  keySubscription = new Subscription();
+  infoSubscription = new Subscription();
   constructor(private remoteInfo: RemoteInfoService) { }
 
   ngOnInit(): void {
-    this.remoteInfo.infoSubject.subscribe(infoRes=>{
+  this.infoSubscription = this.remoteInfo.infoSubject.subscribe(infoRes=>{
       this.info = infoRes;
-      console.log(infoRes);
       this.errorMessage = infoRes.RelatedTopics.length > 0 ? '' : 'nothing  to found on ' + infoRes.Definition
     })
   }
@@ -27,7 +27,6 @@ export class SearchBoxComponent implements OnInit, AfterViewInit, OnDestroy {
         .pipe(debounceTime(1000))
         .pipe(mergeMap(keyEvent => {
           var txtVal = (keyEvent.target as HTMLInputElement).value;
-          console.log(txtVal);
           return this.remoteInfo.getInfo(txtVal)
         })).subscribe(res=>{},err=>{
           this.errorMessage = err.message;
@@ -36,6 +35,7 @@ export class SearchBoxComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   ngOnDestroy(): void {
     this.keySubscription.unsubscribe();
+    this.infoSubscription.unsubscribe();
   }
 
 }
