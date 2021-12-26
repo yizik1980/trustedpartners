@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges, ViewChild } from '@angular/core';
-import { debounceTime, filter, fromEvent, mergeMap, Subscription } from 'rxjs';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { debounce, debounceTime, EMPTY, filter, fromEvent, mergeMap, Subscription, timer } from 'rxjs';
 import { RemoteInfoService } from 'src/app/services/remote-info.service';
 import info from '../../model/info';
 @Component({
@@ -16,19 +16,21 @@ export class SearchBoxComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private remoteInfo: RemoteInfoService) { }
 
   ngOnInit(): void {
-  this.infoSubscription = this.remoteInfo.infoSubject.subscribe(infoRes=>{
+    this.infoSubscription = this.remoteInfo.infoSubject.subscribe(infoRes => {
       this.info = infoRes;
       this.errorMessage = infoRes.RelatedTopics.length > 0 ? '' : 'nothing  to found on ' + infoRes.Definition
     })
   }
   ngAfterViewInit(): void {
     if (this.searchField) {
-  this.keySubscription = fromEvent<KeyboardEvent>(this.searchField.nativeElement, 'keydown')
-        .pipe(debounceTime(1000))
+      this.keySubscription = fromEvent<KeyboardEvent>(this.searchField.nativeElement, 'keydown')
+        .pipe(debounce(ev => {
+          return ev.key === 'Enter' ? timer(0):timer(5000);
+        }))
         .pipe(mergeMap(keyEvent => {
           var txtVal = (keyEvent.target as HTMLInputElement).value;
           return this.remoteInfo.getInfo(txtVal)
-        })).subscribe(res=>{},err=>{
+        })).subscribe(res => { }, err => {
           this.errorMessage = err.message;
         });
     }
