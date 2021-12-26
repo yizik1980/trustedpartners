@@ -40,4 +40,7 @@ export class RemoteInfoService {
     }
     return JSON.parse(search) as Array<searchHistory>;
   }
+  clearHistory(){
+    localStorage.removeItem('sreach-history');
+  }
 }

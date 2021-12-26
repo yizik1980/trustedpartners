@@ -22,6 +22,10 @@ export class SearchHistoryComponent implements OnInit , OnDestroy {
   showSearch(val:string){
     this.infoService.getInfo(val).subscribe()
   }
+  clear(){
+    this.infoService.clearHistory();
+    this.searchList = this.infoService.getsearchHistory();
+  }
   
   ngOnDestroy(): void {
     this.infoSubscription.unsubscribe();

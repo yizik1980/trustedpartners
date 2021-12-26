@@ -1,5 +1,5 @@
 <div *ngIf="searchList.length>0" class="wrap">
-    <h6>Search List History</h6>
+    <h6 class="d-flex justify-content-xl-between lign-items-center">Search List History <a class="cursor" (click)="clear()"><i class="trash"></i></a></h6>
     <aside>
         <p *ngFor="let item of searchList"><a class="cursor" (click)="showSearch(item.definition)">{{item.definition}}</a></p>
     </aside>
